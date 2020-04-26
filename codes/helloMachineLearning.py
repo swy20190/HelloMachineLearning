@@ -16,7 +16,7 @@ scores_treeBD_d4 = cross_val_score(clf_treeBD_d4, first_set, labels, cv=10)  # 1
 print(scores_treeBD_d4)
 # visualize
 feature_name = ['balance', 'duration']
-class_name = ['not_buy','buy']
+class_name = ['not_buy', 'buy']
 treeBD_d4_dot = tree.export_graphviz(
     clf_treeBD_d4
     , out_file=None
