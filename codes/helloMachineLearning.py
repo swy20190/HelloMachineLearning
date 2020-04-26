@@ -9,12 +9,12 @@ first_set = bank_data[['balance', 'duration']]
 labels = bank_data['y']
 # print(first_set)
 # decision tree begins
-clf = tree.DecisionTreeClassifier()
+clf = tree.DecisionTreeClassifier(criterion="entropy", max_depth=4)
 clf = clf.fit(first_set, labels)
-scores = cross_val_score(clf, first_set, labels, cv=10)  # 10-means cross validate
-print(scores)
+scores_treeBD_d4 = cross_val_score(clf, first_set, labels, cv=10)  # 10-means cross validate
+print(scores_treeBD_d4)
+# visualize
 feature_name = ['balance', 'duration']
-
 firstTree_dot = tree.export_graphviz(
     clf
     , out_file=None
@@ -24,3 +24,8 @@ firstTree_dot = tree.export_graphviz(
 graph = graphviz.Source(firstTree_dot)
 graph.render("../output/TreeForBalanceAndDuration")
 
+# write scores into file
+with open("../output/scoresOfTrees.txt", "w") as scoreFile:
+    scoreFile.write("Scores of TreeForBalanceAndDuration, depth=4\n")
+    scoreFile.write(str(scores_treeBD_d4))
+    scoreFile.write("\n")
