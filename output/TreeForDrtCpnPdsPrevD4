@@ -11,7 +11,7 @@ node [shape=box] ;
 3 -> 4 ;
 5 [label="entropy = 0.469\nsamples = 20\nvalue = [18, 2]\nclass = not_buy"] ;
 3 -> 5 ;
-6 [label="previous <= 0.5\nentropy = 0.173\nsamples = 4872\nvalue = [4746, 126]\nclass = not_buy"] ;
+6 [label="pdays <= 0.0\nentropy = 0.173\nsamples = 4872\nvalue = [4746, 126]\nclass = not_buy"] ;
 2 -> 6 ;
 7 [label="entropy = 0.134\nsamples = 4075\nvalue = [3999, 76]\nclass = not_buy"] ;
 6 -> 7 ;
