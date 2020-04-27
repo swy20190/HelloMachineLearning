@@ -105,6 +105,12 @@ print(reg_1_5.coef_)
 scores_Reg_1_5 = cross_val_score(reg_1_5, first_set, labels, cv=10)
 print(scores_Reg_1_5)
 
+reg_2_1 = linear_model.Ridge(alpha=1)
+reg_2_1.fit(second_set, labels)
+print(reg_2_1.coef_)
+scores_Reg_2_1 = cross_val_score(reg_2_1, second_set, labels, cv=10)
+print(scores_Reg_2_1)
+
 # write scores into file
 with open("../output/scoresOfTrees.txt", "w") as scoreFile:
     scoreFile.write("Scores of TreeForAgeAndBalance, depth=4\n")
@@ -137,4 +143,9 @@ with open("../output/scoresOfReg.txt", "w") as sor:
     sor.write(str(reg_1_5.coef_)+'\n')
     sor.write("Scores of RidgeForAgeAndBalance alpha=0.5\n")
     sor.write(str(scores_Reg_1_5))
+    sor.write('\n')
+    sor.write("Coef of set 2 alpha=1 is:\n")
+    sor.write(str(reg_2_1.coef_)+'\n')
+    sor.write("Scores of RidgeForDrtCpnPdsPrev alpha=1\n")
+    sor.write(str(scores_Reg_2_1))
     sor.write('\n')

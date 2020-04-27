@@ -1,4 +1,15 @@
-Coef of set 1 is:
-[7.47582131e-04 5.91852454e-06]Scores of RidgeForAgeAndBalance
+Coef of set 1 alpha=1 is:
+[7.47582131e-04 5.91852454e-06]
+Scores of RidgeForAgeAndBalance alpha=1
 [ 0.          0.          0.          0.          0.          0.
   0.          0.         -0.01819435  0.        ]
+Coef of set 1 alpha=0.5 is:
+[7.47582263e-04 5.91852449e-06]
+Scores of RidgeForAgeAndBalance alpha=0.5
+[ 0.          0.          0.          0.          0.          0.
+  0.          0.         -0.01819435  0.        ]
+Coef of set 2 alpha=1 is:
+[ 0.0004901  -0.00324802  0.00026635  0.00658497]
+Scores of RidgeForDrtCpnPdsPrev alpha=1
+[0.         0.         0.         0.         0.         0.
+ 0.         0.         0.17499845 0.        ]
