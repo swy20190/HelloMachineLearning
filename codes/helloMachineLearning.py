@@ -86,6 +86,10 @@ gnb_1.fit(first_set, labels)
 scores_GNB_1 = cross_val_score(gnb_1, first_set, labels, cv=10)  # 10-means cross validate
 print(scores_GNB_1)
 
+gnb_2 = GaussianNB()
+gnb_2.fit(second_set,labels)
+scores_GNB_2 = cross_val_score(gnb_2, second_set, labels, cv=10)  # 10-means cross validate
+print(scores_GNB_2)
 # write scores into file
 with open("../output/scoresOfTrees.txt", "w") as scoreFile:
     scoreFile.write("Scores of TreeForAgeAndBalance, depth=4\n")
@@ -103,4 +107,7 @@ with open("../output/scoresOfTrees.txt", "w") as scoreFile:
 with open("../output/scoresOfBayes.txt","w") as ya_scoreFile:
     ya_scoreFile.write("Scores of GausNBForAgeAndBalance\n")
     ya_scoreFile.write(str(scores_GNB_1))
+    ya_scoreFile.write("\n")
+    ya_scoreFile.write("Scores of GausNBForDrtCpnPdsPrev\n")
+    ya_scoreFile.write(str(scores_GNB_2))
     ya_scoreFile.write("\n")
