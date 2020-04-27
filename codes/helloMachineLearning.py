@@ -93,11 +93,17 @@ scores_GNB_2 = cross_val_score(gnb_2, second_set, labels, cv=10)  # 10-means cro
 print(scores_GNB_2)
 # naive bayes ends
 # Ridge begins
-reg_1 = linear_model.Ridge(alpha=1)
-reg_1.fit(first_set, labels)
-print(reg_1.coef_)
-scores_Reg_1 = cross_val_score(reg_1, first_set, labels, cv=10)
-print(scores_Reg_1)
+# performs very bad
+reg_1_1 = linear_model.Ridge(alpha=1)
+reg_1_1.fit(first_set, labels)
+print(reg_1_1.coef_)
+scores_Reg_1_1 = cross_val_score(reg_1_1, first_set, labels, cv=10)
+print(scores_Reg_1_1)
+reg_1_5 = linear_model.Ridge(alpha=.5)
+reg_1_5.fit(first_set, labels)
+print(reg_1_5.coef_)
+scores_Reg_1_5 = cross_val_score(reg_1_5, first_set, labels, cv=10)
+print(scores_Reg_1_5)
 
 # write scores into file
 with open("../output/scoresOfTrees.txt", "w") as scoreFile:
@@ -123,6 +129,12 @@ with open("../output/scoresOfBayes.txt", "w") as ya_scoreFile:
 
 with open("../output/scoresOfReg.txt", "w") as sor:
     sor.write("Coef of set 1 alpha=1 is:\n")
-    sor.write(str(reg_1.coef_)+'\n')
+    sor.write(str(reg_1_1.coef_)+'\n')
     sor.write("Scores of RidgeForAgeAndBalance alpha=1\n")
-    sor.write(str(scores_Reg_1))
+    sor.write(str(scores_Reg_1_1))
+    sor.write("\n")
+    sor.write("Coef of set 1 alpha=0.5 is:\n")
+    sor.write(str(reg_1_5.coef_)+'\n')
+    sor.write("Scores of RidgeForAgeAndBalance alpha=0.5\n")
+    sor.write(str(scores_Reg_1_5))
+    sor.write('\n')
