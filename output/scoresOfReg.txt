@@ -1,0 +1,4 @@
+Coef of set 1 is:
+[7.47582131e-04 5.91852454e-06]Scores of RidgeForAgeAndBalance
+[ 0.          0.          0.          0.          0.          0.
+  0.          0.         -0.01819435  0.        ]

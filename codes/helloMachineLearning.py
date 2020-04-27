@@ -5,6 +5,7 @@ from sklearn import preprocessing
 import graphviz
 from sklearn.model_selection import cross_val_score
 from sklearn.naive_bayes import GaussianNB
+from sklearn import linear_model
 
 bank_data = pd.read_csv("../datas/train_set.csv")
 # first set of balance and duration
@@ -87,9 +88,17 @@ scores_GNB_1 = cross_val_score(gnb_1, first_set, labels, cv=10)  # 10-means cros
 print(scores_GNB_1)
 
 gnb_2 = GaussianNB()
-gnb_2.fit(second_set,labels)
+gnb_2.fit(second_set, labels)
 scores_GNB_2 = cross_val_score(gnb_2, second_set, labels, cv=10)  # 10-means cross validate
 print(scores_GNB_2)
+# naive bayes ends
+# Ridge begins
+reg_1 = linear_model.Ridge(alpha=1)
+reg_1.fit(first_set, labels)
+print(reg_1.coef_)
+scores_Reg_1 = cross_val_score(reg_1, first_set, labels, cv=10)
+print(scores_Reg_1)
+
 # write scores into file
 with open("../output/scoresOfTrees.txt", "w") as scoreFile:
     scoreFile.write("Scores of TreeForAgeAndBalance, depth=4\n")
@@ -104,10 +113,16 @@ with open("../output/scoresOfTrees.txt", "w") as scoreFile:
     scoreFile.write("Scores of TreeForDrtCpnPdsPrev, depth=8\n")
     scoreFile.write("\n")
 
-with open("../output/scoresOfBayes.txt","w") as ya_scoreFile:
+with open("../output/scoresOfBayes.txt", "w") as ya_scoreFile:
     ya_scoreFile.write("Scores of GausNBForAgeAndBalance\n")
     ya_scoreFile.write(str(scores_GNB_1))
     ya_scoreFile.write("\n")
     ya_scoreFile.write("Scores of GausNBForDrtCpnPdsPrev\n")
     ya_scoreFile.write(str(scores_GNB_2))
     ya_scoreFile.write("\n")
+
+with open("../output/scoresOfReg.txt", "w") as sor:
+    sor.write("Coef of set 1 alpha=1 is:\n")
+    sor.write(str(reg_1.coef_)+'\n')
+    sor.write("Scores of RidgeForAgeAndBalance alpha=1\n")
+    sor.write(str(scores_Reg_1))
