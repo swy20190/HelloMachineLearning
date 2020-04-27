@@ -4,6 +4,7 @@ from sklearn import tree
 from sklearn import preprocessing
 import graphviz
 from sklearn.model_selection import cross_val_score
+from sklearn.naive_bayes import GaussianNB
 
 bank_data = pd.read_csv("../datas/train_set.csv")
 # first set of balance and duration
@@ -78,6 +79,12 @@ treeDrtCpnPdsPrev_d8_dot = tree.export_graphviz(
 )
 graph = graphviz.Source(treeDrtCpnPdsPrev_d8_dot)
 graph.render("../output/TreeForDrtCpnPdsPrevD8")
+# decision tree ends
+# naive bayes begins
+gnb_1 = GaussianNB()
+gnb_1.fit(first_set, labels)
+scores_GNB_1 = cross_val_score(gnb_1, first_set, labels, cv=10)  # 10-means cross validate
+print(scores_GNB_1)
 
 # write scores into file
 with open("../output/scoresOfTrees.txt", "w") as scoreFile:
@@ -92,3 +99,8 @@ with open("../output/scoresOfTrees.txt", "w") as scoreFile:
     scoreFile.write("\n")
     scoreFile.write("Scores of TreeForDrtCpnPdsPrev, depth=8\n")
     scoreFile.write("\n")
+
+with open("../output/scoresOfBayes.txt","w") as ya_scoreFile:
+    ya_scoreFile.write("Scores of GausNBForAgeAndBalance\n")
+    ya_scoreFile.write(str(scores_GNB_1))
+    ya_scoreFile.write("\n")
