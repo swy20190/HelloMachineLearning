@@ -48,6 +48,23 @@ graph.render("../output/TreeForAgeAndBalanceD8")
 # second set of duration, campaign, pdays, as well as previous
 # performs much more better than the 1st one
 second_set = bank_data[['duration', 'campaign', 'pdays', 'previous']]
+# decision tree max_depth=3
+clf_treeDrtCpnPdsPrev_d3 = tree.DecisionTreeClassifier(criterion="entropy", max_depth=3)
+clf_treeDrtCpnPdsPrev_d3 = clf_treeDrtCpnPdsPrev_d3.fit(second_set, labels)
+scores_treeDrtCpnPdsPrev_d3 = cross_val_score(
+    clf_treeDrtCpnPdsPrev_d3, second_set, labels, cv=10
+)  # 10-means cross validate
+print(scores_treeDrtCpnPdsPrev_d3)
+# visualize
+feature_name_2 = ['duration', 'campaign', 'pdays', 'previous']
+treeDrtCpnPdsPrev_d3_dot = tree.export_graphviz(
+    clf_treeDrtCpnPdsPrev_d3
+    , out_file=None
+    , feature_names=feature_name_2
+    , class_names=class_name
+)
+graph = graphviz.Source(treeDrtCpnPdsPrev_d3_dot)
+graph.render("../output/TreeForDrtCpnPdsPrevD3")
 # decision tree max_depth=4
 clf_treeDrtCpnPdsPrev_d4 = tree.DecisionTreeClassifier(criterion="entropy", max_depth=4)
 clf_treeDrtCpnPdsPrev_d4 = clf_treeDrtCpnPdsPrev_d4.fit(second_set, labels)
@@ -56,7 +73,6 @@ scores_treeDrtCpnPdsPrev_d4 = cross_val_score(
 )  # 10-means cross validate
 print(scores_treeDrtCpnPdsPrev_d4)
 # visualize
-feature_name_2 = ['duration', 'campaign', 'pdays', 'previous']
 treeDrtCpnPdsPrev_d4_dot = tree.export_graphviz(
     clf_treeDrtCpnPdsPrev_d4
     , out_file=None
@@ -70,7 +86,7 @@ clf_treeDrtCpnPdsPrev_d8 = tree.DecisionTreeClassifier(criterion="entropy", max_
 clf_treeDrtCpnPdsPrev_d8 = clf_treeDrtCpnPdsPrev_d8.fit(second_set, labels)
 scores_treeDrtCpnPdsPrev_d8 = cross_val_score(
     clf_treeDrtCpnPdsPrev_d8, second_set, labels, cv=10
-) # 10-means cross validate
+)  # 10-means cross validate
 print(scores_treeDrtCpnPdsPrev_d8)
 # visualize
 treeDrtCpnPdsPrev_d8_dot = tree.export_graphviz(
@@ -84,19 +100,19 @@ graph.render("../output/TreeForDrtCpnPdsPrevD8")
 # decision tree ends
 # naive bayes begins
 gnb_1 = GaussianNB()
-gnb_1.fit(first_set, labels)
+gnb_1 = gnb_1.fit(first_set, labels)
 scores_GNB_1 = cross_val_score(gnb_1, first_set, labels, cv=10)  # 10-means cross validate
 print(scores_GNB_1)
 
 gnb_2 = GaussianNB()
-gnb_2.fit(second_set, labels)
+gnb_2 = gnb_2.fit(second_set, labels)
 scores_GNB_2 = cross_val_score(gnb_2, second_set, labels, cv=10)  # 10-means cross validate
 print(scores_GNB_2)
 # naive bayes ends
 # Ridge begins
 # performs very bad
 reg_1_1 = linear_model.Ridge(alpha=1)
-reg_1_1.fit(first_set, labels)
+reg_1_1 = reg_1_1.fit(first_set, labels)
 print(reg_1_1.coef_)
 scores_Reg_1_1 = cross_val_score(reg_1_1, first_set, labels, cv=10)
 print(scores_Reg_1_1)
@@ -129,6 +145,9 @@ with open("../output/scoresOfTrees.txt", "w") as scoreFile:
     scoreFile.write("\n")
     scoreFile.write("Scores of TreeForAgeAndBalance, depth=8\n")
     scoreFile.write(str(scores_treeAB_d8))
+    scoreFile.write("\n")
+    scoreFile.write("Scores of TreeForDrtCpnPdsPrev, depth=3\n")
+    scoreFile.write(str(scores_treeDrtCpnPdsPrev_d3))
     scoreFile.write("\n")
     scoreFile.write("Scores of TreeForDrtCpnPdsPrev, depth=4\n")
     scoreFile.write(str(scores_treeDrtCpnPdsPrev_d4))

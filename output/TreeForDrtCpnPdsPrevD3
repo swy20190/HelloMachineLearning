@@ -1,0 +1,32 @@
+digraph Tree {
+node [shape=box] ;
+0 [label="duration <= 448.5\nentropy = 0.521\nsamples = 25317\nvalue = [22356, 2961]\nclass = not_buy"] ;
+1 [label="duration <= 129.5\nentropy = 0.372\nsamples = 21696\nvalue = [20141, 1555]\nclass = not_buy"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="duration <= 74.5\nentropy = 0.118\nsamples = 8635\nvalue = [8498, 137]\nclass = not_buy"] ;
+1 -> 2 ;
+3 [label="entropy = 0.029\nsamples = 3763\nvalue = [3752, 11]\nclass = not_buy"] ;
+2 -> 3 ;
+4 [label="entropy = 0.173\nsamples = 4872\nvalue = [4746, 126]\nclass = not_buy"] ;
+2 -> 4 ;
+5 [label="pdays <= 33.0\nentropy = 0.496\nsamples = 13061\nvalue = [11643, 1418]\nclass = not_buy"] ;
+1 -> 5 ;
+6 [label="entropy = 0.367\nsamples = 10484\nvalue = [9747, 737]\nclass = not_buy"] ;
+5 -> 6 ;
+7 [label="entropy = 0.833\nsamples = 2577\nvalue = [1896, 681]\nclass = not_buy"] ;
+5 -> 7 ;
+8 [label="duration <= 698.5\nentropy = 0.964\nsamples = 3621\nvalue = [2215, 1406]\nclass = not_buy"] ;
+0 -> 8 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+9 [label="pdays <= 8.5\nentropy = 0.852\nsamples = 2118\nvalue = [1531, 587]\nclass = not_buy"] ;
+8 -> 9 ;
+10 [label="entropy = 0.784\nsamples = 1718\nvalue = [1317, 401]\nclass = not_buy"] ;
+9 -> 10 ;
+11 [label="entropy = 0.996\nsamples = 400\nvalue = [214, 186]\nclass = not_buy"] ;
+9 -> 11 ;
+12 [label="duration <= 827.5\nentropy = 0.994\nsamples = 1503\nvalue = [684, 819]\nclass = buy"] ;
+8 -> 12 ;
+13 [label="entropy = 0.989\nsamples = 508\nvalue = [285, 223]\nclass = not_buy"] ;
+12 -> 13 ;
+14 [label="entropy = 0.972\nsamples = 995\nvalue = [399, 596]\nclass = buy"] ;
+12 -> 14 ;
+}
