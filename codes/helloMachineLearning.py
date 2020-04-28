@@ -141,6 +141,10 @@ svc_c1_rbf_set2 = svm.SVC(C=1, kernel='rbf')
 svc_c1_rbf_set2.fit(second_set, labels)
 scores_svcC1RbfSet2 = cross_val_score(svc_c1_rbf_set2, second_set, labels, cv=10)
 print(scores_svcC1RbfSet2)
+svc_c5_rbf_set2 = svm.SVC(C=0.5, kernel='rbf')
+svc_c5_rbf_set2.fit(second_set, labels)
+scores_svcC5RbfSet2 = cross_val_score(svc_c5_rbf_set2, second_set, labels, cv=10)
+print(scores_svcC5RbfSet2)
 
 
 # write scores into file
@@ -194,4 +198,7 @@ with open("../output/scoresOfSvc.txt", "w") as sos:
     sos.write('\n')
     sos.write("Scores of set 2 C=1 kernel=rbf:\n")
     sos.write(str(scores_svcC1RbfSet2))
+    sos.write('\n')
+    sos.write("Scores of set 2 C=0.5 kernel=rbf:\n")
+    sos.write(str(scores_svcC5RbfSet2))
     sos.write('\n')
