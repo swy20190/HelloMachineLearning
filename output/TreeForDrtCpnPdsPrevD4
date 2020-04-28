@@ -49,7 +49,7 @@ node [shape=box] ;
 21 -> 23 ;
 24 [label="duration <= 827.5\nentropy = 0.994\nsamples = 1503\nvalue = [684, 819]\nclass = buy"] ;
 16 -> 24 ;
-25 [label="pdays <= 0.5\nentropy = 0.989\nsamples = 508\nvalue = [285, 223]\nclass = not_buy"] ;
+25 [label="previous <= 0.5\nentropy = 0.989\nsamples = 508\nvalue = [285, 223]\nclass = not_buy"] ;
 24 -> 25 ;
 26 [label="entropy = 0.974\nsamples = 424\nvalue = [252, 172]\nclass = not_buy"] ;
 25 -> 26 ;

@@ -6,6 +6,7 @@ import graphviz
 from sklearn.model_selection import cross_val_score
 from sklearn.naive_bayes import GaussianNB
 from sklearn import linear_model
+from sklearn import svm
 
 bank_data = pd.read_csv("../datas/train_set.csv")
 # first set of balance and duration
@@ -110,6 +111,12 @@ reg_2_1.fit(second_set, labels)
 print(reg_2_1.coef_)
 scores_Reg_2_1 = cross_val_score(reg_2_1, second_set, labels, cv=10)
 print(scores_Reg_2_1)
+# Ridge ends
+# svc begins
+svc_c1_rbf_set1 = svm.SVC(C=1, kernel='rbf')
+svc_c1_rbf_set1.fit(first_set, labels)
+scores_svcC1RbfSet1 = cross_val_score(svc_c1_rbf_set1, first_set, labels, cv=10)
+print(scores_svcC1RbfSet1)
 
 # write scores into file
 with open("../output/scoresOfTrees.txt", "w") as scoreFile:
@@ -149,3 +156,8 @@ with open("../output/scoresOfReg.txt", "w") as sor:
     sor.write("Scores of RidgeForDrtCpnPdsPrev alpha=1\n")
     sor.write(str(scores_Reg_2_1))
     sor.write('\n')
+
+with open("../output/scoresOfSvc.txt","w") as sos:
+    sos.write("Scores of set 1 C=1 kernel=rbf:\n")
+    sos.write(str(scores_svcC1RbfSet1))
+    sos.write('\n')
