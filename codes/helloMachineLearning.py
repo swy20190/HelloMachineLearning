@@ -117,6 +117,10 @@ svc_c1_rbf_set1 = svm.SVC(C=1, kernel='rbf')
 svc_c1_rbf_set1.fit(first_set, labels)
 scores_svcC1RbfSet1 = cross_val_score(svc_c1_rbf_set1, first_set, labels, cv=10)
 print(scores_svcC1RbfSet1)
+svc_c5_rbf_set1 = svm.SVC(C=0.5, kernel='rbf')
+svc_c5_rbf_set1.fit(first_set, labels)
+scores_svcC5RbfSet1 = cross_val_score(svc_c5_rbf_set1, first_set, labels, cv=10)
+print(scores_svcC5RbfSet1)
 
 # write scores into file
 with open("../output/scoresOfTrees.txt", "w") as scoreFile:
@@ -157,7 +161,10 @@ with open("../output/scoresOfReg.txt", "w") as sor:
     sor.write(str(scores_Reg_2_1))
     sor.write('\n')
 
-with open("../output/scoresOfSvc.txt","w") as sos:
+with open("../output/scoresOfSvc.txt", "w") as sos:
     sos.write("Scores of set 1 C=1 kernel=rbf:\n")
     sos.write(str(scores_svcC1RbfSet1))
+    sos.write('\n')
+    sos.write("Scores of set 1 C=0.5 kernel=rbf:\n")
+    sos.write(str(scores_svcC5RbfSet1))
     sos.write('\n')
