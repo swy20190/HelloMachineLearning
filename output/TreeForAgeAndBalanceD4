@@ -55,7 +55,7 @@ node [shape=box] ;
 25 -> 26 ;
 27 [label="entropy = 0.0\nsamples = 1\nvalue = [0, 1]\nclass = buy"] ;
 25 -> 27 ;
-28 [label="balance <= 31313.0\nentropy = 0.811\nsamples = 4\nvalue = [1, 3]\nclass = buy"] ;
+28 [label="age <= 72.5\nentropy = 0.811\nsamples = 4\nvalue = [1, 3]\nclass = buy"] ;
 24 -> 28 ;
 29 [label="entropy = 1.0\nsamples = 2\nvalue = [1, 1]\nclass = not_buy"] ;
 28 -> 29 ;
