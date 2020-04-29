@@ -145,7 +145,7 @@ svc_c5_rbf_set2 = svm.SVC(C=0.5, kernel='rbf')
 svc_c5_rbf_set2.fit(second_set, labels)
 scores_svcC5RbfSet2 = cross_val_score(svc_c5_rbf_set2, second_set, labels, cv=10)
 print(scores_svcC5RbfSet2)
-
+# svc ends
 
 # write scores into file
 with open("../output/scoresOfTrees.txt", "w") as scoreFile:

@@ -1,0 +1,10 @@
+The score of test 0 is 1.0
+The score of test 1 is 1.0
+The score of test 2 is 1.0
+The score of test 3 is 1.0
+The score of test 4 is 1.0
+The score of test 5 is 1.0
+The score of test 6 is 1.0
+The score of test 7 is 1.0
+The score of test 8 is 0.7136650868878357
+The score of test 9 is 0.11725227003553099
