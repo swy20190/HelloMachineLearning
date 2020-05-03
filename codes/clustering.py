@@ -5,7 +5,7 @@ from sklearn.manifold import TSNE
 
 
 def k_means(data_set, output_file, png_file):
-    model = cluster.KMeans(n_clusters=4, max_iter=100, n_jobs=4)
+    model = cluster.KMeans(n_clusters=4, max_iter=100, n_jobs=4, init="k-means++")
     model.fit(data_set)
     r = pd.concat([data_set, pd.Series(model.labels_, index=data_set.index)], axis=1)
     r.columns = list(data_set.columns) + [u'聚类类别']
@@ -25,9 +25,12 @@ def k_means(data_set, output_file, png_file):
     dd = t_sne[r[u'聚类类别'] == 3]
     plt.plot(dd[0], dd[1], 'o')
     plt.savefig(png_file)
-    plt.show()
+    # plt.show()
 
 
 frog_data = pd.read_csv("../datas/Frogs_MFCCs.csv")
 first_set = frog_data[['MFCCs_ 1', 'MFCCs_ 5', 'MFCCs_ 9', 'MFCCs_13', 'MFCCs_17', 'MFCCs_21']]
 k_means(first_set, "../output/kMeansSet_1.xlsx", "../output/kMeansSet_1.png")
+
+second_set = frog_data[['MFCCs_ 3', 'MFCCs_ 7', 'MFCCs_11', 'MFCCs_15', 'MFCCs_19']]
+k_means(second_set, "../output/kMeansSet_2.xlsx", "../output/kMeansSet_2.png")
