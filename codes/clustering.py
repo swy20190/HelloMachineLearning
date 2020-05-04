@@ -61,6 +61,19 @@ r.columns = list(first_set.columns) + [u'聚类类别']
 r.to_excel("../output/dbscanSet_1.xlsx")
 p_labels = list(db.labels_)
 print(list(set(list(db.labels_))))
-if len(list(set(list(db.labels_)))) == 4:
-    print(metrics.fowlkes_mallows_score(tLabel, p_labels))
-
+print(metrics.fowlkes_mallows_score(tLabel, p_labels))
+t_sne_db_1 = TSNE()
+t_sne_db_1.fit(first_set)
+t_sne_db_1 = pd.DataFrame(t_sne_db_1.embedding_, index=first_set.index)
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+dd = t_sne_db_1[r[u'聚类类别'] == 0]
+plt.plot(dd[0], dd[1], 'r.')
+dd = t_sne_db_1[r[u'聚类类别'] == 1]
+plt.plot(dd[0], dd[1], 'go')
+dd = t_sne_db_1[r[u'聚类类别'] == 2]
+plt.plot(dd[0], dd[1], 'b*')
+dd = t_sne_db_1[r[u'聚类类别'] == -1]
+plt.plot(dd[0], dd[1], 'o')
+plt.savefig("../output/dbscanSet_1.png")
+plt.show()
