@@ -6,3 +6,11 @@ By DBSCAN, the f-m_score of Set_1 is: 0.6849251120786362
 By DBSCAN, the rand_score of Set_1 is: 0.4583237713426138
 By DBSCAN, the f-m_score of Set_2 is: 0.6759196726408404
 By DBSCAN, the rand_score of Set_2 is: 0.4404169880584603
+By k-means, the f-m_score of Set_1 is: 0.7458767128714958
+By k-means, the rand_score of Set_1 is: 0.560293634861001
+By k-means, the f-m_score of Set_2 is: 0.7031381331440558
+By k-means, the rand_score of Set_2 is: 0.49460205372347493
+By DBSCAN, the f-m_score of Set_1 is: 0.6849251120786362
+By DBSCAN, the rand_score of Set_1 is: 0.4583237713426138
+By DBSCAN, the f-m_score of Set_2 is: 0.6759196726408404
+By DBSCAN, the rand_score of Set_2 is: 0.4404169880584603
