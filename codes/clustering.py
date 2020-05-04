@@ -30,6 +30,7 @@ def k_means(data_set, output_file, png_file, t_labels, score_file, set_name):
     dd = t_sne[r[u'聚类类别'] == 3]
     plt.plot(dd[0], dd[1], 'o')
     plt.savefig(png_file)
+    plt.clf()
     # plt.show()
 
 
@@ -47,12 +48,12 @@ for family in frog_data['Family']:
 
 scoreFile = "../output/scoreOfClustering.txt"
 first_set = frog_data[['MFCCs_ 1', 'MFCCs_ 5', 'MFCCs_ 9', 'MFCCs_13', 'MFCCs_17', 'MFCCs_21']]
-# k_means(first_set, "../output/kMeansSet_1.xlsx", "../output/kMeansSet_1.png", tLabel, scoreFile, "Set_1")
+k_means(first_set, "../output/kMeansSet_1.xlsx", "../output/kMeansSet_1.png", tLabel, scoreFile, "Set_1")
 
 second_set = frog_data[['MFCCs_ 3', 'MFCCs_ 7', 'MFCCs_11', 'MFCCs_15', 'MFCCs_19']]
-# k_means(second_set, "../output/kMeansSet_2.xlsx", "../output/kMeansSet_2.png", tLabel, scoreFile, "Set_2")
+k_means(second_set, "../output/kMeansSet_2.xlsx", "../output/kMeansSet_2.png", tLabel, scoreFile, "Set_2")
 
-#  DBSCAN begins
+# DBSCAN begins
 db = cluster.DBSCAN(eps=0.1011, min_samples=115, n_jobs=-1)
 db.fit(first_set)
 r = pd.concat([first_set, pd.Series(db.labels_, index=first_set.index)], axis=1)
@@ -76,4 +77,30 @@ plt.plot(dd[0], dd[1], 'b*')
 dd = t_sne_db_1[r[u'聚类类别'] == -1]
 plt.plot(dd[0], dd[1], 'o')
 plt.savefig("../output/dbscanSet_1.png")
-plt.show()
+plt.clf()
+
+# dbscan of set 2
+db = cluster.DBSCAN(eps=0.1020, min_samples=90, n_jobs=-1)
+db.fit(second_set)
+r = pd.concat([second_set, pd.Series(db.labels_, index=second_set.index)], axis=1)
+r.columns = list(second_set.columns) + [u'聚类类别']
+# print(r)
+r.to_excel("../output/dbscanSet_2.xlsx")
+p_labels = list(db.labels_)
+print(list(set(list(db.labels_))))
+print(metrics.fowlkes_mallows_score(tLabel, p_labels))
+t_sne_db_2 = TSNE()
+t_sne_db_2.fit(second_set)
+t_sne_db_2 = pd.DataFrame(t_sne_db_2.embedding_, index=second_set.index)
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+dd = t_sne_db_2[r[u'聚类类别'] == 0]
+plt.plot(dd[0], dd[1], 'r.')
+dd = t_sne_db_2[r[u'聚类类别'] == 1]
+plt.plot(dd[0], dd[1], 'go')
+dd = t_sne_db_2[r[u'聚类类别'] == 2]
+plt.plot(dd[0], dd[1], 'b*')
+dd = t_sne_db_2[r[u'聚类类别'] == -1]
+plt.plot(dd[0], dd[1], 'o')
+plt.savefig("../output/dbscanSet_2.png")
+plt.clf()
