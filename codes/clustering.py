@@ -15,7 +15,8 @@ def k_means(data_set, output_file, png_file, t_labels, score_file, set_name):
     print(r)
     r.to_excel(output_file)
     with open(score_file, "a") as sf:
-        sf.write("The score of " + set_name + " is: " + str(metrics.fowlkes_mallows_score(t_labels, p_labels))+"\n")
+        sf.write("By k-means, the f-m_score of " + set_name + " is: " + str(metrics.fowlkes_mallows_score(t_labels, p_labels))+"\n")
+        sf.write("By k-means, the rand_score of " + set_name + " is: " + str(metrics.adjusted_rand_score(t_labels, p_labels))+"\n")
     t_sne = TSNE()
     t_sne.fit(data_set)
     t_sne = pd.DataFrame(t_sne.embedding_, index=data_set.index)
@@ -61,8 +62,12 @@ r.columns = list(first_set.columns) + [u'聚类类别']
 # print(r)
 r.to_excel("../output/dbscanSet_1.xlsx")
 p_labels = list(db.labels_)
-print(list(set(list(db.labels_))))
-print(metrics.fowlkes_mallows_score(tLabel, p_labels))
+with open(scoreFile, "a") as sf:
+    sf.write("By DBSCAN, the f-m_score of Set_1 is: " + str(
+        metrics.fowlkes_mallows_score(tLabel, p_labels)) + "\n")
+    sf.write("By DBSCAN, the rand_score of Set_1 is: " + str(
+        metrics.adjusted_rand_score(tLabel, p_labels)) + "\n")
+
 t_sne_db_1 = TSNE()
 t_sne_db_1.fit(first_set)
 t_sne_db_1 = pd.DataFrame(t_sne_db_1.embedding_, index=first_set.index)
@@ -87,8 +92,12 @@ r.columns = list(second_set.columns) + [u'聚类类别']
 # print(r)
 r.to_excel("../output/dbscanSet_2.xlsx")
 p_labels = list(db.labels_)
-print(list(set(list(db.labels_))))
-print(metrics.fowlkes_mallows_score(tLabel, p_labels))
+with open(scoreFile, "a") as sf:
+    sf.write("By DBSCAN, the f-m_score of Set_2 is: " + str(
+        metrics.fowlkes_mallows_score(tLabel, p_labels)) + "\n")
+    sf.write("By DBSCAN, the rand_score of Set_2 is: " + str(
+        metrics.adjusted_rand_score(tLabel, p_labels)) + "\n")
+
 t_sne_db_2 = TSNE()
 t_sne_db_2.fit(second_set)
 t_sne_db_2 = pd.DataFrame(t_sne_db_2.embedding_, index=second_set.index)

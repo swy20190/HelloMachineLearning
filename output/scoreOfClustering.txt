@@ -1,8 +1,8 @@
-The score of Set_1 is: 0.7458767128714958
-The score of Set_2 is: 0.703480264674854
-The score of Set_1 is: 0.7458767128714958
-The score of Set_2 is: 0.7033137308169896
-The score of Set_1 is: 0.7458767128714958
-The score of Set_2 is: 0.7031381331440558
-The score of Set_1 is: 0.7458767128714958
-The score of Set_2 is: 0.7035150521263597
+By k-means, the f-m_score of Set_1 is: 0.7458767128714958
+By k-means, the rand_score of Set_1 is: 0.560293634861001
+By k-means, the f-m_score of Set_2 is: 0.7035150521263597
+By k-means, the rand_score of Set_2 is: 0.4951562677915443
+By DBSCAN, the f-m_score of Set_1 is: 0.6849251120786362
+By DBSCAN, the rand_score of Set_1 is: 0.4583237713426138
+By DBSCAN, the f-m_score of Set_2 is: 0.6759196726408404
+By DBSCAN, the rand_score of Set_2 is: 0.4404169880584603
