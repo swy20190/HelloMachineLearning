@@ -1,2 +1,6 @@
 The score of Set_1 is: 0.7458767128714958
 The score of Set_2 is: 0.703480264674854
+The score of Set_1 is: 0.7458767128714958
+The score of Set_2 is: 0.7033137308169896
+The score of Set_1 is: 0.7458767128714958
+The score of Set_2 is: 0.7031381331440558

@@ -47,7 +47,20 @@ for family in frog_data['Family']:
 
 scoreFile = "../output/scoreOfClustering.txt"
 first_set = frog_data[['MFCCs_ 1', 'MFCCs_ 5', 'MFCCs_ 9', 'MFCCs_13', 'MFCCs_17', 'MFCCs_21']]
-k_means(first_set, "../output/kMeansSet_1.xlsx", "../output/kMeansSet_1.png", tLabel, scoreFile, "Set_1")
+# k_means(first_set, "../output/kMeansSet_1.xlsx", "../output/kMeansSet_1.png", tLabel, scoreFile, "Set_1")
 
 second_set = frog_data[['MFCCs_ 3', 'MFCCs_ 7', 'MFCCs_11', 'MFCCs_15', 'MFCCs_19']]
-k_means(second_set, "../output/kMeansSet_2.xlsx", "../output/kMeansSet_2.png", tLabel, scoreFile, "Set_2")
+# k_means(second_set, "../output/kMeansSet_2.xlsx", "../output/kMeansSet_2.png", tLabel, scoreFile, "Set_2")
+
+#  DBSCAN begins
+db = cluster.DBSCAN(eps=0.1011, min_samples=115, n_jobs=-1)
+db.fit(first_set)
+r = pd.concat([first_set, pd.Series(db.labels_, index=first_set.index)], axis=1)
+r.columns = list(first_set.columns) + [u'聚类类别']
+# print(r)
+r.to_excel("../output/dbscanSet_1.xlsx")
+p_labels = list(db.labels_)
+print(list(set(list(db.labels_))))
+if len(list(set(list(db.labels_)))) == 4:
+    print(metrics.fowlkes_mallows_score(tLabel, p_labels))
+
