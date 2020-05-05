@@ -1,0 +1,2 @@
+By myKMeans, the f-m_score of Set_1 is: 0.5629565765534772
+By myKMeans, the rand_score of Set_1 is: 0.29187840634780593

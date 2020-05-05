@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn import metrics
 from sklearn.manifold import TSNE
 
 
@@ -51,12 +52,9 @@ def my_k_means(data_set, k):
 
 frog_data = pd.read_csv("../datas/Frogs_MFCCs.csv")
 first_set = frog_data[['MFCCs_ 1', 'MFCCs_ 5', 'MFCCs_ 9', 'MFCCs_13', 'MFCCs_17', 'MFCCs_21']]
-# print(first_set)
 original_first_set = first_set
 first_set = first_set.values
-# print(first_set)
-# rc = randCent(first_set, 4)
-# print(rc)
+# clustering
 t1, t2 = my_k_means(first_set, 4)
 t2 = t2.tolist()
 print(t2)
@@ -67,6 +65,22 @@ print(p_labels)
 r = pd.concat([original_first_set, pd.Series(p_labels, index=original_first_set.index)], axis=1)
 r.columns = list(original_first_set.columns) + [u'聚类类别']
 r.to_excel("../output/myKMeansSet1.xlsx")
+# scoring
+tLabel = []
+for family in frog_data['Family']:
+    if family == "Leptodactylidae":
+        tLabel.append(0)
+    elif family == "Dendrobatidae":
+        tLabel.append(1)
+    elif family == "Hylidae":
+        tLabel.append(2)
+    else:
+        tLabel.append(3)
+with open("../output/scoreOfMyKMeans.txt", "a") as sf:
+    sf.write("By myKMeans, the f-m_score of Set_1 is: " + str(
+        metrics.fowlkes_mallows_score(tLabel, p_labels)) + "\n")
+    sf.write("By myKMeans, the rand_score of Set_1 is: " + str(
+        metrics.adjusted_rand_score(tLabel, p_labels)) + "\n")
 # visualize
 t_sne_db_1 = TSNE()
 t_sne_db_1.fit(original_first_set)
