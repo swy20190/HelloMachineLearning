@@ -47,12 +47,22 @@ def my_k_means(data_set, k):
             centroids[cent, :] = np.mean(data_cent, axis=0)
     return centroids, clusterAssment
 
+
 frog_data = pd.read_csv("../datas/Frogs_MFCCs.csv")
 first_set = frog_data[['MFCCs_ 1', 'MFCCs_ 5', 'MFCCs_ 9', 'MFCCs_13', 'MFCCs_17', 'MFCCs_21']]
 # print(first_set)
+original_first_set = first_set
 first_set = first_set.values
 # print(first_set)
 # rc = randCent(first_set, 4)
 # print(rc)
 t1, t2 = my_k_means(first_set, 4)
+t2 = t2.tolist()
 print(t2)
+p_labels = []
+for i in t2:
+    p_labels.append(i[0])
+print(p_labels)
+r = pd.concat([original_first_set, pd.Series(p_labels, index=original_first_set.index)], axis=1)
+r.columns = list(original_first_set.columns) + [u'聚类类别']
+r.to_excel("../output/myKMeansSet1.xlsx")
