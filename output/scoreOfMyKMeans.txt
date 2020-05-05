@@ -2,3 +2,7 @@ By myKMeans, the f-m_score of Set_1 is: 0.6889651332139299
 By myKMeans, the rand_score of Set_1 is: 0.4503279607144459
 By myKMeans, the f-m_score of Set_2 is: 0.718950216510681
 By myKMeans, the rand_score of Set_2 is: 0.5016761875816126
+By myKMeans, the f-m_score of Set_1 is: 0.7090424267463291
+By myKMeans, the rand_score of Set_1 is: 0.4836139495437991
+By myKMeans, the f-m_score of Set_2 is: 0.7035150521263597
+By myKMeans, the rand_score of Set_2 is: 0.4951562677915443
