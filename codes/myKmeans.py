@@ -57,11 +57,9 @@ first_set = first_set.values
 # clustering
 t1, t2 = my_k_means(first_set, 4)
 t2 = t2.tolist()
-print(t2)
 p_labels = []
 for i in t2:
     p_labels.append(i[0])
-print(p_labels)
 r = pd.concat([original_first_set, pd.Series(p_labels, index=original_first_set.index)], axis=1)
 r.columns = list(original_first_set.columns) + [u'聚类类别']
 r.to_excel("../output/myKMeansSet1.xlsx")
@@ -96,4 +94,40 @@ plt.plot(dd[0], dd[1], 'b*')
 dd = t_sne_db_1[r[u'聚类类别'] == 3]
 plt.plot(dd[0], dd[1], 'o')
 plt.savefig("../output/myKMeansSet_1.png")
+plt.clf()
+
+# set 2
+second_set = frog_data[['MFCCs_ 3', 'MFCCs_ 7', 'MFCCs_11', 'MFCCs_15', 'MFCCs_19']]
+original_second_set = second_set
+second_set = second_set.values
+# clustering
+t1, t2 = my_k_means(second_set, 4)
+t2 = t2.tolist()
+p_labels = []
+for i in t2:
+    p_labels.append(i[0])
+r = pd.concat([original_second_set, pd.Series(p_labels, index=original_second_set.index)], axis=1)
+r.columns = list(original_second_set.columns) + [u'聚类类别']
+r.to_excel("../output/myKMeansSet2.xlsx")
+# scoring
+with open("../output/scoreOfMyKMeans.txt", "a") as sf:
+    sf.write("By myKMeans, the f-m_score of Set_2 is: " + str(
+        metrics.fowlkes_mallows_score(tLabel, p_labels)) + "\n")
+    sf.write("By myKMeans, the rand_score of Set_2 is: " + str(
+        metrics.adjusted_rand_score(tLabel, p_labels)) + "\n")
+# visualize
+t_sne_db_2 = TSNE()
+t_sne_db_2.fit(original_second_set)
+t_sne_db_2 = pd.DataFrame(t_sne_db_2.embedding_, index=original_second_set.index)
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+dd = t_sne_db_2[r[u'聚类类别'] == 0]
+plt.plot(dd[0], dd[1], 'r.')
+dd = t_sne_db_2[r[u'聚类类别'] == 1]
+plt.plot(dd[0], dd[1], 'go')
+dd = t_sne_db_2[r[u'聚类类别'] == 2]
+plt.plot(dd[0], dd[1], 'b*')
+dd = t_sne_db_2[r[u'聚类类别'] == 3]
+plt.plot(dd[0], dd[1], 'o')
+plt.savefig("../output/myKMeansSet_2.png")
 plt.clf()
