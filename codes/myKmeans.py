@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.manifold import TSNE
 
 
 def distEclud(vec_a, vec_b):
@@ -66,3 +67,19 @@ print(p_labels)
 r = pd.concat([original_first_set, pd.Series(p_labels, index=original_first_set.index)], axis=1)
 r.columns = list(original_first_set.columns) + [u'聚类类别']
 r.to_excel("../output/myKMeansSet1.xlsx")
+# visualize
+t_sne_db_1 = TSNE()
+t_sne_db_1.fit(original_first_set)
+t_sne_db_1 = pd.DataFrame(t_sne_db_1.embedding_, index=original_first_set.index)
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+dd = t_sne_db_1[r[u'聚类类别'] == 0]
+plt.plot(dd[0], dd[1], 'r.')
+dd = t_sne_db_1[r[u'聚类类别'] == 1]
+plt.plot(dd[0], dd[1], 'go')
+dd = t_sne_db_1[r[u'聚类类别'] == 2]
+plt.plot(dd[0], dd[1], 'b*')
+dd = t_sne_db_1[r[u'聚类类别'] == 3]
+plt.plot(dd[0], dd[1], 'o')
+plt.savefig("../output/myKMeansSet_1.png")
+plt.clf()
