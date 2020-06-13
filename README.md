@@ -1,5 +1,6 @@
 # HelloMachineLearning
 Yet another project for the AI course, based on sklearn
+score: 19.0/20.0 内卷再次胜利
 ## 源代码
 见[codes 文件夹](codes)
 
